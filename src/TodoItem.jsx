@@ -1,13 +1,17 @@
 import React from 'react'
+// import propTypes from 'prop-types'
 
-export default
-<div className="alert alert-success">
+class todoItem extends React.Component {
+
+render(){
+return(
+<div className={this.props.setColor(this.props.priority)}>
             <div className="row">
               <div className="col-sm-1">
-                <input type="checkbox" value="checked" name="checkbox" />
+                <input type="checkbox"  />
               </div>
               <div className="col-sm-9">
-                <p></p>
+                <p>{this.props.description}</p>
               </div>
               <div className="col-sm-2">
                 <button className='icon-button edit-todo'><span className="glyphicon glyphicon-edit" /></button>
@@ -15,3 +19,10 @@ export default
               </div>
             </div>
           </div>
+  );
+}
+}
+
+
+
+export default todoItem;
