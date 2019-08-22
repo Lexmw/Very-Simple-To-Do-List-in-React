@@ -3,7 +3,6 @@ import AddTodo from "./AddTodoItem";
 import TodoItem from "./TodoItem";
 // import EditView from './EditView';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -14,39 +13,65 @@ class App extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setColor = this.setColor.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
-  
   handleSubmit(description, priority, id) {
-    console.log("this button was pressed")
+    console.log("this button was pressed");
 
-    let listItem ={
+    let listItem = {
       description: description,
-      priority:priority,
+      priority: priority,
       id: 1 + Math.random(),
       complete: false,
       edit: false
-    }
-    
+    };
+
     this.state.todo.push(listItem);
-    this.setState({todo: this.state.todo, description:'', priority:''})
+    this.setState({ todo: this.state.todo, description: "", priority: "" });
   }
 
-  
-  setColor(priority) {  
-      if (priority === "1") {
-        return ('alert alert-success');
-      } else if (priority === "2") {
-        return('alert alert-warning');
-      } else if (priority === "3") {
-        return('alert alert-danger');
-      }
+  setColor(priority) {
+    if (priority === "1") {
+      return "alert alert-success";
+    } else if (priority === "2") {
+      return "alert alert-warning";
+    } else if (priority === "3") {
+      return "alert alert-danger";
+    }
   }
 
+  handleCheck(id) {
+    console.log("this was checked", id);
+    this.setState(prevState => ({
+      todo: prevState.todo.map(listItem => {
+        if (listItem.id == id) {
+          listItem.complete = !listItem.complete;
+          console.log("this is the listItem:", listItem);
+        }
+        return listItem;
+      })
+    }));
+  }
+
+  handleEdit(id) {
+    console.log('Are you ready to edit?')
+    this.setState(prevState => ({
+      todo: prevState.todo.map(listItem => {
+        if(listItem.id == id){
+          listItem.edit = !listItem.edit;
+          console.log('Edit Status:', listItem.edit);
+        }
+        return listItem;
+      })
+    })
+    )
+  };
 
   render() {
-   let {todo} = this.state
-   console.log({todo})
+    const { todo } = this.state;
+    // //  console.log({todo})
     return (
       <div className="container">
         <h1 className="display-3">VERY SIMPLE TODO APP</h1>
@@ -60,18 +85,23 @@ class App extends Component {
             <div className="panel panel-default">
               <div className="panel-heading">View Todos</div>
               <div className="panel-body">
-                {this.state.todo.map((todo, index) => (
+                {todo.map(todo => (
                   <TodoItem
+                    setColor={this.setColor}
+                    handleCheck={this.handleCheck}
+                    handleEdit = {this.handleEdit}
                     todo={todo}
-                    setColor= {this.setColor}
-                    key={index}
+                    key={todo.id}
                     description={todo.description}
                     priority={todo.priority}
+                    complete={todo.complete}
+                    edit={todo.edit}
+                    id={todo.id}
                   />
                 ))}
               </div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
     );
