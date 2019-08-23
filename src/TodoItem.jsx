@@ -6,35 +6,41 @@ class todoItem extends React.Component {
   constructor(props){
     super(props)
     this.state ={
-      editDescription: this.props.descrition,
-      editPriority: this.props.priority
+      editDescription: this.props.description,
+      editPriority: this.props.priority,
+      id: this.props.id
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
     console.log('It was clicked!');
   }
+
   strikeThru(complete){
     if(complete === true){
-      console.log(complete)
+      console.log(complete);
       return'line-through'
     }else{
       return 'none'
     }
   }
+
+
 render(){
 return(
-<div className={this.props.setColor(this.props.priority)}>
+<li className={this.props.setColor(this.props.priority)}>
             <div className="row">
               {
                 this.props.edit === true ?
 
                 <EditView
-                  editDescription = {this.state.description}
-                  editPriority = {this.state.priority}
+                  editDescription = {this.state.editDescription}
+                  editPriority = {this.state.editPriority}
+                  id = {this.state.id}
                   handleChange ={this.handleChange}
+                  handleSave ={this.props.handleSave}
                   /> 
               :
               <div className= 'row'>
@@ -56,12 +62,14 @@ return(
                 >
                   <span className="glyphicon glyphicon-edit" />
                   </button>
-                <button className='icon-button delete-todo'>
+                <button 
+                className='icon-button delete-todo'
+                onClick = {() => this.props.delTodo(this.props.id)}>
                   <span className="glyphicon glyphicon-trash"/>
                   </button>
               </div>
           </div>
-        </div>
+        </li>
   );
 }
 }
