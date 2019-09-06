@@ -36,7 +36,7 @@ render() {
                 <h4 className="card-text">How much of a priority is this?</h4>
 
                 <select className='create-todo-priority' name='priority' value={this.state.priority} onChange={this.handleChange}>
-                  {/* <option value=''>Priority</option> */}
+                  <option value=''>Priority</option>
                   <option value='1'>Low Priority</option>
                   <option value='2'>Mid Priority</option>
                   <option value='3'>High Priority</option>

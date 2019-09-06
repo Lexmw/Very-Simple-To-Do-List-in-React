@@ -115,7 +115,6 @@ delTodo(id){
             <div className="panel panel-default">
               <div className="panel-heading">View Todos</div>
               <div className="panel-body">
-                <ul>
                 {todo.map(todo => (
                   <TodoItem
                     setColor={this.setColor}
@@ -132,7 +131,6 @@ delTodo(id){
                     id={todo.id}
                   />
                 ))}
-                </ul>
               </div>
             </div>
           </div>
