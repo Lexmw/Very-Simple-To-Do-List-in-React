@@ -65,7 +65,9 @@ class App extends Component {
           listItem.edit = !listItem.edit;
           console.log('Edit Status:', listItem.edit);
         }
+
         return listItem;
+        
       })
     })
     )
