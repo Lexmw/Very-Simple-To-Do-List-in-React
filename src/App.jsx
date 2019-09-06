@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AddTodo from "./AddTodoItem";
 import TodoItem from "./TodoItem";
-// import EditView from './EditView';
+
 
 class App extends Component {
   constructor(props) {
@@ -67,7 +67,7 @@ class App extends Component {
         }
 
         return listItem;
-        
+
       })
     })
     )
